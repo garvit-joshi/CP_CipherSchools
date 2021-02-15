@@ -11,11 +11,13 @@ int searchSortedMatrix(vector<vector<int>> vec, int n, int x)
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
+        {
             if (vec[i][j] == x)
             {
                 cout << "Element at:[" << i << "][" << j << "]\n";
                 return 0;
             }
+        }
     }
 
     cout << "No Element Found";
@@ -34,6 +36,7 @@ int main()
         {
             cin >> vec[i][j];
         }
+        cout<<"\n";
     }
     searchSortedMatrix(vec, m, n);
 
