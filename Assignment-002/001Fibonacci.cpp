@@ -14,6 +14,5 @@ int main ()
     int ele;
     cin>>ele;
     cout << fibonacci(ele);
-    getchar();
     return 0;
 }
