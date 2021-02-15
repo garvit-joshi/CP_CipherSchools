@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int findPeak(vector <int> vec, int range)
+int findPeak(vector<int> vec, int range)
 {
     if (range == 1)
     {
@@ -13,7 +13,7 @@ int findPeak(vector <int> vec, int range)
     {
         return range - 1;
     }
-    for (int i = 1; i < range-1; i++)
+    for (int i = 1; i < range - 1; i++)
     {
         if (vec[i] >= vec[i - 1] && vec[i] >= vec[i + 1])
         {
@@ -32,6 +32,6 @@ int main()
     {
         cin >> vec[i];
     }
-    cout << findPeak(vec, range)<<"\n";
+    cout << findPeak(vec, range) << "\n";
     return 0;
 }
