@@ -1,76 +1,43 @@
-12
-
 #include<bits/stdc++.h>
 using namespace std;
-#define N 4 
-void printSolution(int board[N][N]) 
-{ 
-	for (int i = 0; i < N; i++) { 
-		for (int j = 0; j < N; j++) 
-			printf(" %d ", board[i][j]); 
-		printf("\n"); 
-	} 
-} 
-
-bool isSafe(int board[N][N], int row, int col) 
-{ 
-	int i, j; 
-
-	for (i = 0; i < col; i++) 
-		if (board[row][i]) 
-			return false; 
-
-	for (i = row, j = col; i >= 0 && j >= 0; i--, j--) 
-		if (board[i][j]) 
-			return false; 
-
-	for (i = row, j = col; j >= 0 && i < N; i++, j--) 
-		if (board[i][j]) 
-			return false; 
-
-	return true; 
-} 
-
-bool solveNQUtil(int board[N][N], int col) 
-{ 
-
-	if (col >= N) 
-		return true; 
-
-	for (int i = 0; i < N; i++) { 
-	
-		if (isSafe(board, i, col)) { 
-		
-			board[i][col] = 1; 
-
-			if (solveNQUtil(board, col + 1)) 
-				return true; 
-
-			board[i][col] = 0; 
-		} 
-	} 
-
-	return false; 
-} 
-
-bool solveNQ() 
-{ 
-	int board[N][N] = { { 0, 0, 0, 0 }, 
-						{ 0, 0, 0, 0 }, 
-						{ 0, 0, 0, 0 }, 
-						{ 0, 0, 0, 0 } }; 
-
-	if (solveNQUtil(board, 0) == false) { 
-		printf("Solution does not exist"); 
-		return false; 
-	} 
-
-	printSolution(board); 
-	return true; 
-} 
-
-int main() 
-{ 
-	solveNQ(); 
-	return 0; 
-} 
+bool isSafe(vector<vector<int>> &v,int col,int row,int x)
+{
+    for(int i=0;i<col;i++){if(v[row][i]){return false;}}
+    for(int i=0;i<row;i++){if(v[i][col]){return false;}}
+    for(int i=row,j=col;i>=0 && j>=0;i--,j--){if(v[i][j]){return false;}}
+    for(int i=row,j=col;i<x && j>=0;i++,j--){if(v[i][j]){return false;}}
+    return true;
+}
+bool N_queen(vector<vector<int>> &v,int col,int x)
+{
+    if(col==x){return true;}
+    for(int row=0;row<x;row++)
+    {
+        if(isSafe(v,col,row,x))
+        {
+            v[row][col]=1;
+            if(N_queen(v,col+1,x)==true){return true;}
+            v[row][col]=0;
+        }
+    }
+    return false;
+}
+void printPositions(vector<vector<int>>& v,int x)
+{
+    for(int i=0;i<x;i++)
+    {
+        for(int j=0;j<x;j++)
+        {
+            cout<<v[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+int main()
+{
+    int x;
+    cout<<"Enter the value of N:";cin>>x;
+    vector<vector<int>> v(x,vector<int>(x,0));
+    if(N_queen(v,0,x)==true){cout<<"Possible!!"<<endl;printPositions(v,x);}
+    else{cout<<"Not Possible!!";}
+}
